@@ -24,6 +24,12 @@ const fontWeight = {
   bold: '700',
   extraBold: '800',
   black: '900',
-};
+} as const;
 
-export { fontFamily, fontSize, fontWeight };
+const ROUTES = {
+  Drawer: {
+    Schedule: 'Schedule',
+  },
+} as const;
+
+export { fontFamily, fontSize, fontWeight, ROUTES };
