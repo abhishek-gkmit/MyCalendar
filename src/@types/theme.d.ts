@@ -4,6 +4,7 @@ interface Colors {
   primary: string;
   secondary: string;
   background: string;
+  foreground: string;
 
   accentBlue: string;
   lightGreen: string;
