@@ -32,4 +32,13 @@ const ROUTES = {
   },
 } as const;
 
-export { fontFamily, fontSize, fontWeight, ROUTES };
+const storageKeys = {
+  accessToken: 'access_token',
+  refreshToken: 'refresh_token',
+} as const;
+
+const images = {
+  calendarLogo: require('@assets/images/calendar_logo.png'),
+};
+
+export { fontFamily, fontSize, fontWeight, ROUTES, storageKeys, images };

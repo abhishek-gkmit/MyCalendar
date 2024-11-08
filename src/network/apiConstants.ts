@@ -18,5 +18,5 @@ export const apiConstants = {
 };
 
 export const apiEndpoints = {
-  login: `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${redirectTo}&response_type=code&scope=${API_SCOPES}&access_type=offline&prompt=consent`,
+  login: `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=http://localhost:3000&response_type=code&scope=${API_SCOPES}&access_type=offline&prompt=consent`,
 };

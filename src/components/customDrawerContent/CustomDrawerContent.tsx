@@ -5,7 +5,10 @@ import {
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 
+import ButtonWithIcon from '@components/buttonWithIcon';
 import { ThemeContext } from '@config/contexts/ThemeContext';
+import { UserContext } from '@config/contexts/UserContext';
+
 import { fontSize, fontWeight } from '@constants';
 
 import getThemedStyles from './styles';
@@ -29,6 +32,7 @@ function CustomDrawerItem({ label, isFocused, onPress }: CustomDrawerItemProps) 
 }
 
 function CustomDrawerContent({ navigation, state }: DrawerContentComponentProps) {
+  const { clearTokens } = useContext(UserContext);
   const { colors } = useContext(ThemeContext);
 
   const styles = useMemo(() => getThemedStyles(colors), [colors]);
@@ -54,6 +58,13 @@ function CustomDrawerContent({ navigation, state }: DrawerContentComponentProps)
           />
         );
       })}
+
+      <ButtonWithIcon
+        text="Logout"
+        textStyle={StyleSheet.compose(styles.drawerItemLabel, styles.btnText)}
+        style={StyleSheet.compose(styles.drawerItemContainer, styles.logoutBtn)}
+        onPress={clearTokens}
+      />
     </DrawerContentScrollView>
   );
 }

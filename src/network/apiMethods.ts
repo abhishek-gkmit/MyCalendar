@@ -1,32 +1,27 @@
-import { AxiosRequestConfig } from 'axios';
+import { apiConstants } from './apiConstants';
+import { _get, _post } from './axiosMethods';
 
-import { axiosInstance } from './axiosInstance';
-import { handleError } from './errorHandler';
+const { LOGIN_API_BASE_URL, CLIENT_ID, CLIENT_SECRET } = apiConstants;
 
-export async function _get(endpoint: string, params: any) {
-  const res = await axiosInstance.get(endpoint, { params });
+async function getTokens(code: string) {
+  const data = {
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    code,
+    grant_type: 'authorization_code',
+    redirect_uri: 'http://localhost:3000',
+  };
 
-  return handleError(res);
+  const config = {
+    baseURL: LOGIN_API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  };
+
+  const res = await _post('', '', true, data, config);
+
+  return { accessToken: res?.access_token, refreshToken: res?.refresh_token };
 }
 
-export async function _post(
-  endpoint: string,
-  body: any,
-  isLoginRelated = false,
-  loginConfig: AxiosRequestConfig = {},
-) {
-  if (isLoginRelated) {
-    const res = await axiosInstance.request(loginConfig);
-
-    return handleError(res);
-  }
-  const res = await axiosInstance.post(endpoint, body);
-
-  return handleError(res);
-}
-
-export async function _put(endpoint: string, body: any) {
-  const res = await axiosInstance.put(endpoint, body);
-
-  return handleError(res);
-}
+export { getTokens };

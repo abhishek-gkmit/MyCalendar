@@ -5,7 +5,7 @@ import { fontSize, fontWeight } from '@constants';
 function getThemedStyles(colors: Colors) {
   return StyleSheet.create({
     drawerContentContainer: {
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.drawerContentColor,
     },
 
     drawerItemContainer: {
@@ -25,6 +25,15 @@ function getThemedStyles(colors: Colors) {
       fontSize: fontSize.sixteen,
       fontWeight: fontWeight.regular,
       paddingLeft: 10,
+    },
+
+    logoutBtn: {
+      backgroundColor: colors.lightRed,
+      marginTop: 10,
+    },
+
+    btnText: {
+      color: colors.foreground,
     },
   });
 }
