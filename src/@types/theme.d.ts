@@ -1,12 +1,5 @@
-interface Colors {
-  warning: string;
-  error: string;
-  primary: string;
-  secondary: string;
-  background: string;
-  foreground: string;
+import { colors } from '@theme/colors';
 
-  accentBlue: string;
-  lightGreen: string;
-  darkGreen: string;
+declare global {
+  type Colors = (typeof colors)[keyof typeof colors];
 }

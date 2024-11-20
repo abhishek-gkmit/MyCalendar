@@ -12,7 +12,7 @@ function ThemeContextProvider({ children }: React.PropsWithChildren) {
   const theme = useColorScheme();
 
   const colorsByTheme = useMemo(() => {
-    return theme ? colors[theme] : colors.light;
+    return colors[theme || 'light'];
   }, [theme]);
 
   return (

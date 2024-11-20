@@ -91,7 +91,7 @@
 			<dict>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>calendar</string>
+					<string>mycalendar</string>
 				</array>
 			</dict>
 		</array>

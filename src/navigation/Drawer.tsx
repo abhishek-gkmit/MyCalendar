@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Schedule from '@screens/schedule';
-import { ROUTES } from '@constants';
+import ROUTES from '@constants/routes';
 import CustomDrawerHeader from '@components/customDrawerHeader';
 import CustomDrawerContent from '@components/customDrawerContent';
 

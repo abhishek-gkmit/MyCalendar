@@ -1,25 +1,25 @@
 import { StyleSheet } from 'react-native';
 
-import { fontSize, fontWeight } from '@constants';
+import { fontSize } from '@constants/fonts';
+import { moderateScale } from '@utility/scalingHelpers';
 
 function getThemedStyles(colors: Colors) {
   return StyleSheet.create({
     drawerContainer: {
       backgroundColor: colors.secondary,
       flexDirection: 'row',
-      gap: 10,
+      gap: moderateScale(10),
       justifyContent: 'flex-start',
       alignItems: 'center',
     },
 
     openBtn: {
-      margin: 10,
+      margin: moderateScale(10),
     },
 
     title: {
       color: colors.foreground,
-      fontSize: fontSize.eighteen,
-      fontWeight: fontWeight.regular,
+      fontSize: moderateScale(fontSize.eighteen),
     },
   });
 }

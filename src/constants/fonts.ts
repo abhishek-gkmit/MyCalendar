@@ -1,0 +1,60 @@
+const fontFamily = {
+  NunitoSansExtraLight: 'NunitoSans_10pt-ExtraLight',
+  NunitoSansExtraLightItalic: 'NunitoSans_10pt-ExtraLightItalic',
+  NunitoSansLight: 'NunitoSans_10pt-Light',
+  NunitoSansLightItalic: 'NunitoSans_10pt-LightItalic',
+  NunitoSansRegular: 'NunitoSans_10pt-Regular',
+  NunitoSansRegularItalic: 'NunitoSans_10pt-RegularItalic',
+  NunitoSansMedium: 'NunitoSans_10pt-Medium',
+  NunitoSansMediumItalic: 'NunitoSans_10pt-MediumItalic',
+  NunitoSansSemiBold: 'NunitoSans_10pt-SemiBold',
+  NunitoSansSemiBoldItalic: 'NunitoSans_10pt-SemiBoldItalic',
+  NunitoSansBold: 'NunitoSans_10pt-Bold',
+  NunitoSansBoldItalic: 'NunitoSans_10pt-BoldItalic',
+  NunitoSansExtraBold: 'NunitoSans_10pt-ExtraBold',
+  NunitoSansExtraBoldItalic: 'NunitoSans_10pt-ExtraBoldItalic',
+  NunitoSansBlack: 'NunitoSans_10pt-Black',
+  NunitoSansBlackItalic: 'NunitoSans-BlackItalic',
+
+  MontserratRegular: 'Montserrat-Regular',
+  MontserratRegularItalic: 'Montserrat-RegularItalic',
+  MontserratThin: 'Montserrat-Thin',
+  MontserratThinItalic: 'Montserrat-ThinItalic',
+  MontserratExtraLight: 'Montserrat-ExtraLight',
+  MontserratExtraLightItalic: 'Montserrat-ExtraLightItalic',
+  MontserratLight: 'Montserrat-Light',
+  MontserratLightItalic: 'Montserrat-LightItalic',
+  MontserratMedium: 'Montserrat-Medium',
+  MontserratMediumItalic: 'Montserrat-MediumItalic',
+  MontserratSemiBold: 'Montserrat-SemiBold',
+  MontserratSemiBoldItalic: 'Montserrat-SemiBoldItalic',
+  MontserratBold: 'Montserrat-Bold',
+  MontserratBoldItalic: 'Montserrat-BoldItalic',
+  MontserratBlack: 'Montserrat-Black',
+  MontserratBlackItalic: 'Montserrat-BlackItalic',
+};
+
+const fontSize = {
+  twelve: 12,
+  fourteen: 14,
+  sixteen: 16,
+  eighteen: 18,
+  twenty: 20,
+  twentyFour: 24,
+  thirtySix: 36,
+  fourtyEight: 48,
+};
+
+const fontWeight = {
+  thin: '100',
+  extraLight: '200',
+  light: '300',
+  regular: '400',
+  medium: '500',
+  semiBold: '600',
+  bold: '700',
+  extraBold: '800',
+  black: '900',
+} as const;
+
+export { fontFamily, fontSize, fontWeight };
