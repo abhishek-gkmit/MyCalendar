@@ -5,6 +5,7 @@ import {
   saveAccessToken,
   saveRefreshToken,
 } from '@utility/asyncStorage';
+import { setRequestInterceptor } from '@utility/helpers';
 
 export const UserContext = createContext<UserContextValues>({
   accessToken: '',
@@ -18,7 +19,7 @@ export function UserContextProvider({ children }: React.PropsWithChildren) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
-  const setAccessTokenWrapper = useCallback(
+  const setAndSaveAccessToken = useCallback(
     async (accessToken: string) => {
       const success = await saveAccessToken(accessToken);
 
@@ -29,7 +30,7 @@ export function UserContextProvider({ children }: React.PropsWithChildren) {
     [setAccessToken],
   );
 
-  const setRefreshTokenWrapper = useCallback(
+  const setAndSaveRefreshToken = useCallback(
     async (refreshToken: string) => {
       const success = await saveRefreshToken(refreshToken);
 
@@ -41,16 +42,20 @@ export function UserContextProvider({ children }: React.PropsWithChildren) {
   );
 
   const clearTokens = useCallback(async () => {
-    setAccessTokenWrapper('');
-    setRefreshTokenWrapper('');
-  }, [setAccessTokenWrapper, setRefreshTokenWrapper]);
+    setAndSaveAccessToken('');
+    setAndSaveRefreshToken('');
+  }, [setAndSaveAccessToken, setAndSaveRefreshToken]);
 
   useEffect(() => {
     (async () => {
       const accessToken = await getAccessToken();
       const refreshToken = await getRefreshToken();
 
-      setAccessToken(accessToken);
+      if (accessToken) {
+        setRequestInterceptor(accessToken);
+      }
+
+      setAccessToken(accessToken || 'no_token');
       setRefreshToken(refreshToken);
     })();
   }, []);
@@ -60,8 +65,8 @@ export function UserContextProvider({ children }: React.PropsWithChildren) {
       value={{
         accessToken,
         refreshToken,
-        setAccessToken: setAccessTokenWrapper,
-        setRefreshToken: setRefreshTokenWrapper,
+        setAccessToken: setAndSaveAccessToken,
+        setRefreshToken: setAndSaveRefreshToken,
         clearTokens,
       }}>
       {children}

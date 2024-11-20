@@ -1,18 +1,17 @@
 import { StyleSheet } from 'react-native';
 
-import { fontSize } from '@constants';
+import { fontSize } from '@constants/fonts';
 
 function getThemedStyles(colors: Colors) {
   return StyleSheet.create({
     loginScreen: {
-      padding: 20,
       alignItems: 'center',
     },
 
     btnStyle: {
       justifyContent: 'center',
       alignItems: 'center',
-      gap: 5,
+      gap: 10,
       backgroundColor: colors.accentBlue,
       width: '80%',
     },
@@ -22,6 +21,12 @@ function getThemedStyles(colors: Colors) {
     img: {
       width: 200,
       height: 200,
+    },
+
+    heading: {
+      color: colors.foreground,
+      fontSize: fontSize.twentyFour,
+      marginTop: 35,
     },
   });
 }

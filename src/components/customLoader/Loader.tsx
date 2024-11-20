@@ -1,12 +1,12 @@
 import { useContext, useMemo } from 'react';
-import { View, ActivityIndicator, Platform, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 
 import { ThemeContext } from '@config/contexts/ThemeContext';
 
 import getThemedStyles from '@theme/globalStyles';
 import getStyles from './styles';
 
-function Loader() {
+function Loader({ size }: CustomLoaderProps) {
   const { colors } = useContext(ThemeContext);
 
   const globalStyles = useMemo(() => getThemedStyles(colors), [colors]);
@@ -21,7 +21,7 @@ function Loader() {
       <ActivityIndicator
         animating={true}
         color={colors.primary}
-        size={Platform.OS === 'ios' ? 'small' : 60}
+        size={size || 'large'}
       />
     </View>
   );

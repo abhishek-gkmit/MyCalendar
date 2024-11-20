@@ -3,7 +3,7 @@ import { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native/types';
 
 declare global {
   interface CustomDrawerItemProps {
-    label: string;
+    routeName: string;
     isFocused: boolean;
     onPress: () => void;
   }
@@ -20,5 +20,9 @@ declare global {
     iconPosition?: 'start' | 'end';
     textStyle?: StyleProp<TextStyle>;
     style?: StyleProp<ViewStyle>;
+  }
+
+  interface CustomLoaderProps {
+    size?: 'small' | 'large' | number;
   }
 }

@@ -1,17 +1,25 @@
-import Toast, { ToastType } from 'react-native-toast-message';
+import { axiosInstance } from '@network/axiosInstance';
 
-export function showToast(type: ToastType, heading: string, message: string) {
-  Toast.show({ type, text1: heading, text2: message });
+export function setRequestInterceptor(accessToken: string) {
+  // setting interceptors so we don't have to pass the `Authorization` token everytime
+  axiosInstance.interceptors.request.clear();
+  axiosInstance.interceptors.request.use(function onFulfilled(config) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+    return config;
+  });
 }
 
-export function showErrorToast(heading: string, message: string) {
-  showToast('error', heading, message);
+export function formatDate(date: Date) {
+  return `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}T${date
+      .getHours()
+      .toString()
+      .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 }
 
-export function showSuccessToast(heading: string, message: string) {
-  showToast('success', heading, message);
-}
-
-export function showInfoToast(heading: string, message: string) {
-  showToast('info', heading, message);
+export function formatDateWithoutTimezone(date: Date) {
+  return `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 }

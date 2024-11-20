@@ -4,12 +4,17 @@ import { storageKeys } from '@constants';
 
 const { accessToken, refreshToken } = storageKeys;
 
+// this object will be used to set the new `access_token` in `localStorage` and axios interceptor
+const TOKENS: TokenValues = { access_token: null, refresh_token: null };
+
 async function getToken(type: TokenType) {
   const token = await AsyncStorage.getItem(type);
 
   if (!token) {
     return null;
   }
+
+  TOKENS[type] = token;
 
   return token;
 }
@@ -41,4 +46,10 @@ async function saveRefreshToken(value: string) {
   return await saveToken(refreshToken, value);
 }
 
-export { getAccessToken, getRefreshToken, saveAccessToken, saveRefreshToken };
+export {
+  getAccessToken,
+  getRefreshToken,
+  saveAccessToken,
+  saveRefreshToken,
+  TOKENS,
+};

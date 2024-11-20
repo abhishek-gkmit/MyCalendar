@@ -1,16 +1,20 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { StyleSheet, View, Linking, Image } from 'react-native';
+import { StyleSheet, View, Linking, Image, Text } from 'react-native';
 
 import ButtonWithIcon from '@components/buttonWithIcon';
 import Loader from '@components/customLoader';
+
 import { ThemeContext } from '@config/contexts/ThemeContext';
 import { UserContext } from '@config/contexts/UserContext';
 
-import { axiosInstance } from '@network/axiosInstance';
-import { apiEndpoints } from '@network/apiConstants';
-import { getTokens } from '@network/apiMethods';
+import images from '@constants/images';
+import { fontSize } from '@constants/fonts';
 
-import { fontSize, images } from '@constants';
+import { apiEndpoints } from '@network/apiConstants';
+import { getTokensFromApi } from '@network/apiMethods';
+
+import { setRequestInterceptor } from '@utility/helpers';
+import { moderateScale } from '@utility/scalingHelpers';
 
 import getThemedStyles from '@theme/globalStyles';
 import getThemedStylesLocal from './styles';
@@ -31,16 +35,11 @@ function Login() {
 
   const setTokensAndInterceptor = useCallback(
     async (url: string) => {
-      const code = url.slice(url.indexOf('?') + 1);
+      const code = url.slice(url.indexOf('=') + 1);
 
-      const tokens = await getTokens(code);
+      const tokens = await getTokensFromApi(code);
 
-      // setting interceptors so we don't have to pass the `Authorization` token everytime
-      axiosInstance.interceptors.request.clear();
-      axiosInstance.interceptors.request.use(function onFulfilled(config) {
-        config.headers.Authorization = `Bearer ${tokens.accessToken}`;
-        return config;
-      });
+      setRequestInterceptor(tokens.accessToken);
 
       setAccessToken(tokens.accessToken);
       setRefreshToken(tokens.refreshToken);
@@ -59,15 +58,17 @@ function Login() {
   return (
     <View
       style={StyleSheet.compose(globalStyles.screen, localStyles.loginScreen)}>
+      <Text style={localStyles.heading}>My Calendar</Text>
       <Image source={images.calendarLogo} style={localStyles.img} />
       <ButtonWithIcon
-        text="SignIn with"
+        text="Sign-In with Google"
         icon={{
           name: 'google',
           color: colors.secondary,
-          size: fontSize.twentyFour,
+          size: moderateScale(fontSize.twentyFour),
         }}
         textStyle={localStyles.btnTextStyle}
+        iconPosition="start"
         style={localStyles.btnStyle}
         activeOpacity={0.9}
         onPress={redirectToLogin}

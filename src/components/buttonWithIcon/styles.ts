@@ -1,3 +1,4 @@
+import { moderateScale } from '@utility/scalingHelpers';
 import { StyleSheet } from 'react-native';
 
 function getThemedStyles(colors: Colors) {
@@ -5,8 +6,8 @@ function getThemedStyles(colors: Colors) {
     button: {
       flexDirection: 'row',
       backgroundColor: colors.primary,
-      borderRadius: 10,
-      padding: 10,
+      borderRadius: moderateScale(10),
+      padding: moderateScale(10),
     },
 
     buttonText: {
