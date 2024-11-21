@@ -21,9 +21,6 @@ axiosInstance.interceptors.response.use(
     const { status: statusCode } = error;
 
     if (statusCode === 401) {
-      // accessToken expired
-      console.error('Error: accessToken expired. Refresing accessToken...');
-
       const accessToken = await getAccessTokenFromApi(TOKENS.refresh_token);
       if (accessToken) {
         saveAccessToken(accessToken);
