@@ -1,6 +1,9 @@
 import XDate from 'xdate';
 
 import { axiosInstance } from '@network/axiosInstance';
+import { dateFormats } from '@constants';
+
+const { yearMonthDay } = dateFormats;
 
 const DAYS_IN_MONTHS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -29,7 +32,7 @@ export function formatDateWithoutTimezone(date: Date) {
 }
 
 export function getMonthEndDate(date: XDate): XDate {
-  date = new XDate(date.toString('yyyy-MM-dd'));
+  date = new XDate(date.toString(yearMonthDay));
 
   const remainingDaysInMonth = DAYS_IN_MONTHS[date.getMonth()] - date.getDate();
 

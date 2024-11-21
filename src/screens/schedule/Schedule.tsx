@@ -12,11 +12,14 @@ import Loader from '@components/customLoader';
 import { ThemeContext } from '@config/contexts/ThemeContext';
 import useStyles from '@hooks/useStyles';
 import { getEventsForMonth } from '@network/apiMethods';
-import AgendaEvent from './AgendaEvent';
+import { dateFormats } from '@constants';
 
+import AgendaEvent from './AgendaEvent';
 import getThemedStyles from '@theme/globalStyles';
 import getStyles from './styles';
 import getAgendaTheme from './agendaTheme';
+
+const { yearMonth, yearMonthDay } = dateFormats;
 
 function NoEvents() {
   const localStyles = useStyles(getStyles);
@@ -38,21 +41,22 @@ function Schedule() {
 
   const loadEventsForMonth = useCallback(
     async (dateData?: DateData) => {
-      const date = dateData ? new XDate(dateData.dateString) : new XDate();
+      // new XDate() accepts `undefined` but typescipt was giving an error so added `as`
+      const date = new XDate(dateData?.dateString as string);
 
       const monthEvents = await getEventsForMonth('primary', date);
 
       setCalendarEvents(monthEvents);
-      setCurrentDayEvents(monthEvents[date.toString('yyyy-MM' + '-01')]);
+      setCurrentDayEvents(monthEvents[date.toString(yearMonth + '-01')]);
     },
     [setCalendarEvents, setCurrentDayEvents],
   );
 
   const setEventsForCurrentDay = useCallback(
     (dateData?: DateData) => {
-      const date = dateData
-        ? new XDate(dateData.dateString).toString('yyyy-MM-dd')
-        : new XDate().toString('yyyy-MM-dd');
+      const date = new XDate(dateData?.dateString as string).toString(
+        yearMonthDay,
+      );
 
       setCurrentDayEvents(calendarEvents && calendarEvents[date]);
     },
