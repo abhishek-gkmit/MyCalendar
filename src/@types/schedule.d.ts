@@ -9,7 +9,6 @@ declare global {
 
   interface AgendaComponentProps {
     item?: AgendaItem;
-    date?: string;
     isFirst?: boolean;
   }
 
