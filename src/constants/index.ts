@@ -6,8 +6,8 @@ const storageKeys = {
 } as const;
 
 const dateFormats = {
-  yearMonth: 'yyyyMM',
-  yearMonthDay: 'yyyyMMdd',
+  yearMonth: 'yyyy-MM',
+  yearMonthDay: 'yyyy-MM-dd',
 } as const;
 
 const isIOS = Platform.OS === 'ios';
