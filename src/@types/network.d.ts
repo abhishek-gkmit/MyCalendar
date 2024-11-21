@@ -65,3 +65,13 @@ interface TokenValues {
   access_token: string | null;
   refresh_token: string | null;
 }
+
+interface EventFilters {
+  singleEvents?: boolean;
+  orderBy?: 'startTime' | 'updated';
+  q?: string;
+  maxResults?: number;
+  pageToken?: string;
+  timeMax?: string;
+  timeMin?: string;
+}

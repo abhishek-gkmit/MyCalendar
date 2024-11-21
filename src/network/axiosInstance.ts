@@ -1,5 +1,9 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios';
 
+import { setRequestInterceptor } from '@utility/helpers';
+import { TOKENS, saveAccessToken } from '@utility/asyncStorage';
+
+import { getAccessTokenFromApi } from './apiMethods';
 import { apiConstants } from './apiConstants';
 import { handleError } from './errorHandler';
 
@@ -11,6 +15,25 @@ const instanceConfig: CreateAxiosDefaults = {
 
 export const axiosInstance = axios.create(instanceConfig);
 
-axiosInstance.interceptors.response.use(null, function onError(error) {
-  handleError(error);
-});
+axiosInstance.interceptors.response.use(
+  null,
+  async function onError(error: AxiosError) {
+    const { status: statusCode } = error;
+
+    if (statusCode === 401) {
+      const accessToken = await getAccessTokenFromApi(TOKENS.refresh_token);
+      if (accessToken) {
+        saveAccessToken(accessToken);
+        setRequestInterceptor(accessToken);
+
+        if (error.config) {
+          const { config: requestConfig } = error;
+          requestConfig.headers['Authorization'] = 'Bearer ' + accessToken;
+          return await axios.request(requestConfig);
+        }
+      }
+    }
+
+    handleError(error);
+  },
+);
