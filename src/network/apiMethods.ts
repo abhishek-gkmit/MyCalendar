@@ -1,8 +1,10 @@
+import XDate from 'xdate';
+
 import { formatEvents } from '@utility/dataFormatters';
+import { getMonthEndDate } from '@utility/helpers';
+
 import { apiConstants, apiEndpoints } from './apiConstants';
 import { _get, _post, _postForLogin } from './axiosMethods';
-import { getMonthEndDate } from '@utility/helpers';
-import XDate from 'xdate';
 
 const {
   LOGIN_API_BASE_URL,
