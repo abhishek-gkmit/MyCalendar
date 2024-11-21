@@ -1,6 +1,8 @@
 import { formatEvents } from '@utility/dataFormatters';
 import { apiConstants, apiEndpoints } from './apiConstants';
 import { _get, _post, _postForLogin } from './axiosMethods';
+import { getMonthEndDate } from '@utility/helpers';
+import XDate from 'xdate';
 
 const {
   LOGIN_API_BASE_URL,
@@ -61,15 +63,30 @@ async function getAccessTokenFromApi(refreshToken: string | null) {
   return res?.access_token as string;
 }
 
-async function getEvents(calendarId: string = 'primary', pageToken?: string) {
+async function getEvents(
+  calendarId: string = 'primary',
+  filters?: EventFilters,
+) {
   const url = events(calendarId);
-  const res = await _get(url, {
-    pageToken,
-    singleEvents: true,
-    orderBy: 'startTime',
-  });
+  const res = await _get(url, filters);
 
   return formatEvents(res);
 }
 
-export { getTokensFromApi, getEvents, getAccessTokenFromApi };
+async function getEventsForMonth(calendarId = 'primary', date: XDate) {
+  const monthStartTime = new XDate(
+    date.toString('yyyy-MM') + '-1',
+  ).toISOString();
+  const monthEndTime = getMonthEndDate(date).toISOString();
+
+  const filters: EventFilters = {
+    singleEvents: true,
+    orderBy: 'startTime',
+    timeMax: monthEndTime,
+    timeMin: monthStartTime,
+  };
+
+  return await getEvents(calendarId, filters);
+}
+
+export { getTokensFromApi, getEvents, getAccessTokenFromApi, getEventsForMonth };
