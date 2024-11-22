@@ -18,6 +18,7 @@ import AgendaEvent from './AgendaEvent';
 import getThemedStyles from '@theme/globalStyles';
 import getStyles from './styles';
 import getAgendaTheme from './agendaTheme';
+import { colors } from '@theme/colors';
 
 const { yearMonth, yearMonthDay } = dateFormats;
 
@@ -92,7 +93,13 @@ function Schedule() {
             return <AgendaEvent item={item} />;
           }}
           contentContainerStyle={localStyles.agendaEventsList}
-          ListEmptyComponent={eventsLoading ? <Loader /> : <NoEvents />}
+          ListEmptyComponent={
+            eventsLoading ? (
+              <Loader size="small" backgroundColor={colors.light.white0} />
+            ) : (
+              <NoEvents />
+            )
+          }
         />
       </CalendarProvider>
     </View>
