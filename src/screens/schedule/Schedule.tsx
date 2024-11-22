@@ -41,8 +41,9 @@ function Schedule() {
 
   const loadEventsForMonth = useCallback(
     async (dateData?: DateData) => {
-      // new XDate() accepts `undefined` but typescipt was giving an error so added `as`
-      const date = new XDate(dateData?.dateString as string);
+      const date = dateData?.dateString
+        ? new XDate(dateData.dateString)
+        : new XDate();
 
       const monthEvents = await getEventsForMonth('primary', date);
 
