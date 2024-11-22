@@ -5,6 +5,11 @@ const storageKeys = {
   refreshToken: 'refresh_token',
 } as const;
 
+const dateFormats = {
+  yearMonth: 'yyyy-MM',
+  yearMonthDay: 'yyyy-MM-dd',
+} as const;
+
 const isIOS = Platform.OS === 'ios';
 
-export { storageKeys, isIOS };
+export { storageKeys, isIOS, dateFormats };

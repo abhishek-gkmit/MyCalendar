@@ -2,6 +2,7 @@ import XDate from 'xdate';
 
 import { formatEvents } from '@utility/dataFormatters';
 import { getMonthEndDate } from '@utility/helpers';
+import { dateFormats } from '@constants';
 
 import { apiConstants, apiEndpoints } from './apiConstants';
 import { _get, _post, _postForLogin } from './axiosMethods';
@@ -16,6 +17,8 @@ const {
 } = apiConstants;
 
 const { events } = apiEndpoints;
+
+const { yearMonth } = dateFormats;
 
 // gets the `accessToken` and `refreshToken` from different API endpoint
 // called after user login successfull
@@ -77,7 +80,7 @@ async function getEvents(
 
 async function getEventsForMonth(calendarId = 'primary', date: XDate) {
   const monthStartTime = new XDate(
-    date.toString('yyyy-MM') + '-1',
+    date.toString(yearMonth) + '-01',
   ).toISOString();
   const monthEndTime = getMonthEndDate(date).toISOString();
 
