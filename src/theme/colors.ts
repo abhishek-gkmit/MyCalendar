@@ -46,6 +46,9 @@ export const colors = {
     lightGreen: '#88d7ba',
     darkGreen: '#109c8f',
     agendaKnobColor: commonColors.white5,
+    loginBtnText: '#18222c',
+    loginBtnBackground: '#a1c7ff',
+    loginHeading: '#a1c7ff',
     ...commonColors,
   },
 
@@ -61,6 +64,9 @@ export const colors = {
     lightGreen: '#95e9ca',
     darkGreen: '#24ae9f',
     agendaKnobColor: commonColors.black5,
+    loginBtnText: commonColors.white,
+    loginBtnBackground: '#1482fb',
+    loginHeading: '#1482fb',
     ...commonColors,
   },
 };

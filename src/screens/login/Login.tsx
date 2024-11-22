@@ -73,7 +73,7 @@ function Login() {
           text="Sign-In with Google"
           icon={{
             name: 'google',
-            color: colors.secondary,
+            color: colors.loginBtnText,
             size: moderateScale(fontSize.twentyFour),
           }}
           textStyle={localStyles.btnTextStyle}
