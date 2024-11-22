@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, Linking, Image, Text } from 'react-native';
 
 import ButtonWithIcon from '@components/buttonWithIcon';
@@ -6,6 +6,7 @@ import Loader from '@components/customLoader';
 
 import { ThemeContext } from '@config/contexts/ThemeContext';
 import { UserContext } from '@config/contexts/UserContext';
+import useStyles from '@hooks/useStyles';
 
 import images from '@constants/images';
 import { fontSize } from '@constants/fonts';
@@ -17,6 +18,7 @@ import { setRequestInterceptor } from '@utility/helpers';
 import { moderateScale } from '@utility/scalingHelpers';
 
 import getThemedStyles from '@theme/globalStyles';
+import FadeInSlideUp from './FadeInSlideUp';
 import getThemedStylesLocal from './styles';
 
 function Login() {
@@ -25,8 +27,8 @@ function Login() {
   const { setAccessToken, setRefreshToken } = useContext(UserContext);
   const { colors } = useContext(ThemeContext);
 
-  const globalStyles = useMemo(() => getThemedStyles(colors), [colors]);
-  const localStyles = useMemo(() => getThemedStylesLocal(colors), [colors]);
+  const globalStyles = useStyles(getThemedStyles);
+  const localStyles = useStyles(getThemedStylesLocal);
 
   const redirectToLogin = useCallback(async () => {
     setLoading(true);
@@ -58,21 +60,29 @@ function Login() {
   return (
     <View
       style={StyleSheet.compose(globalStyles.screen, localStyles.loginScreen)}>
-      <Text style={localStyles.heading}>My Calendar</Text>
-      <Image source={images.calendarLogo} style={localStyles.img} />
-      <ButtonWithIcon
-        text="Sign-In with Google"
-        icon={{
-          name: 'google',
-          color: colors.secondary,
-          size: moderateScale(fontSize.twentyFour),
-        }}
-        textStyle={localStyles.btnTextStyle}
-        iconPosition="start"
-        style={localStyles.btnStyle}
-        activeOpacity={0.9}
-        onPress={redirectToLogin}
-      />
+      <FadeInSlideUp delay={0}>
+        <Text style={localStyles.heading}>My Calendar</Text>
+      </FadeInSlideUp>
+
+      <FadeInSlideUp delay={100}>
+        <Image source={images.calendarLogo} style={localStyles.img} />
+      </FadeInSlideUp>
+
+      <FadeInSlideUp style={localStyles.btnContainer} delay={200}>
+        <ButtonWithIcon
+          text="Sign-In with Google"
+          icon={{
+            name: 'google',
+            color: colors.secondary,
+            size: moderateScale(fontSize.twentyFour),
+          }}
+          textStyle={localStyles.btnTextStyle}
+          iconPosition="start"
+          style={localStyles.btnStyle}
+          activeOpacity={0.9}
+          onPress={redirectToLogin}
+        />
+      </FadeInSlideUp>
     </View>
   );
 }
