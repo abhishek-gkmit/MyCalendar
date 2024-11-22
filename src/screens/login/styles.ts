@@ -19,7 +19,7 @@ function getThemedStyles(colors: Colors) {
       justifyContent: 'center',
       alignItems: 'center',
       gap: moderateScale(10),
-      backgroundColor: colors.accentBlue,
+      backgroundColor: colors.loginBtnBackground,
       width: '100%',
       marginTop: verticalScale(5),
     },
@@ -28,7 +28,7 @@ function getThemedStyles(colors: Colors) {
       width: isLandscape() ? '40%' : '80%',
     },
 
-    btnTextStyle: { color: colors.secondary, fontSize: fontSize.eighteen },
+    btnTextStyle: { color: colors.loginBtnText, fontSize: fontSize.eighteen },
 
     img: {
       width: 150,
@@ -36,10 +36,9 @@ function getThemedStyles(colors: Colors) {
     },
 
     heading: {
-      color: colors.accentBlue,
+      color: colors.loginHeading,
       fontSize: moderateScale(fontSize.twentyFour),
       fontFamily: fontFamily.MontserratMedium,
-      // marginTop: verticalScale(35),
     },
   });
 }
