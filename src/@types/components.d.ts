@@ -24,5 +24,6 @@ declare global {
 
   interface CustomLoaderProps {
     size?: 'small' | 'large' | number;
+    backgroundColor?: string;
   }
 }

@@ -46,6 +46,7 @@ export const colors = {
     lightGreen: '#88d7ba',
     darkGreen: '#109c8f',
     agendaKnobColor: commonColors.white5,
+    loaderBackground: commonColors.black,
     ...commonColors,
   },
 
@@ -61,6 +62,7 @@ export const colors = {
     lightGreen: '#95e9ca',
     darkGreen: '#24ae9f',
     agendaKnobColor: commonColors.black5,
+    loaderBackground: commonColors.white,
     ...commonColors,
   },
 };
